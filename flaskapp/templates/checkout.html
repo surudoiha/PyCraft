@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% set active_page = "checkout" %}
+{% block title %} Checkout {% endblock %}
+{%block script%} <link rel="stylesheet" href="../static/checkout.css"> {% endblock %}
+
+{% block content %}
+
+<div class="container d-flex align-items-center justify-content-center" id="checkout-form">
+    <div class="text-center left-side">
+        <form>
+            <div class="form-group billing-form">
+                <h1 class="billingTxt">Billing Information</h1>
+                <div class="row">
+                    <div class="col">
+                        <label for="inputFName"><i class="bi bi-person-fill"></i> First Name</label>
+                        <input type="text" class="form-control form-control-lg" id="inputFName" aria-describedby="nameHelp" placeholder="First name">
+                    </div>
+                    <div class="col">
+                        <label for="inputLName">Last Name</label>
+                        <input type="text" class="form-control form-control-lg" id="inputLName" aria-describedby="nameHelp" placeholder="Last name">
+                    </div>
+                    <!-- <div class="col">
+                        <label for="inputEmail">Email address</label>
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email ">
+                    </div> -->
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                       <label for="inputAddress"><i class="bi bi-house-door-fill"></i> Address</label>
+                       <input type="text" class="form-control form-control-lg" id="inputAddress" aria-describedby="addressHelp" placeholder="123 Apple St.">
+                    </div>
+                    <div class="col">
+                        <label for="inputCity"><i class="bi bi-buildings-fill"></i> City</label>
+                        <input type="text" class="form-control form-control-lg" id="inputCity" aria-describedby="cityHelp" placeholder="Los Angeles">
+                    </div>
+                    <div class="col">
+                        <label for="inputZip"><i class="bi bi-geo-fill"></i> Zip</label>
+                        <input type="number" class="form-control form-control-lg" id="inputZip" aria-describedby="zipHelp" placeholder="00000">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group payment-form">
+                <h1>Payment Information</h1>
+                <h5>Payment Methods (put a pic of like visa, etc)</h5>
+                <div class="row">
+                    <div class="col">
+                        <label for="inputCardName">Name on Card</label>
+                        <input type="text" class="form-control form-control-lg" id="inputCardName" aria-describedby="expDateHelp" placeholder="John Doe">
+                    </div>
+
+                    <div class="col">
+                        <label for="inputCC"><i class="bi bi-credit-card-2-front-fill"></i> Credit Card Numbers</label>
+                        <input type="number" class="form-control form-control-lg" id="inputCC" aria-describedby="CCHelp" placeholder="123 456 7890">
+                    </div>                        
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="inputCIV">CV</label>
+                        <input type="number" class="form-control form-control-lg" id="inputCC" aria-describedby="CCHelp" placeholder="XXX">
+                    </div>
+
+                    <div class="col">
+                        <label for="inputExpDate">Exp. Date</label>
+                        <input type="text" class="form-control form-control-lg" id="inputExpDate" aria-describedby="expDateHelp" placeholder="XX/XX">
+                    </div>
+                </div>
+
+            </div>
+            
+        </form>            
+    </div>
+
+    <div class="verticalLine"></div>
+    <div class="container right-side">
+      <h2>Cart <i class="bi bi-cart3"></i></h2>
+      <br>
+      <h4>Name Item 1 <span class="price">$PRICE</span></h4>
+      <h4>Name Item 1 <span class="price">$PRICE</span></h4>
+      <h4>Name Item 1 <span class="price">$PRICE</span></h4>
+      <br>
+      <hr class="horizontalLine">
+      <h4>Order: $$$$</h4>
+      <h4>Taxes: $$$$</h4>
+      <h4>Shipping: $$$$</h4>
+      <br>
+      <hr class="horizontalLine">
+      <h3> Total Order: $$$</h3>
+      <br>
+      <button type="submit" class="btn btn-primary btn-group-lg" id="btnSubmit">Place Order</button>
+    </div>
+
+</div>
+
+{% endblock %}
