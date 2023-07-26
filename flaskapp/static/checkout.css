@@ -1,0 +1,64 @@
+/* Removing the increments on the number forms */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+.billingTxt {
+  margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 50px;
+}
+
+.row {
+    margin-top: 30px;
+}
+
+#checkout-form {
+  width: 100%;
+}
+
+.left-side {
+  -ms-flex: 90%;
+  flex: 90%;
+  float: left;
+  width: 90%;
+}
+
+.right-side {
+  width: 200px;
+  flex: 40%;
+  float: right;
+}
+
+.verticalLine {
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 6px solid rgba(0, 0, 0, 0.201);
+  height: 500px;
+}
+
+hr.horizontalLine {
+  margin-top: 2px;
+  border-top: 6px solid rgb(0, 0, 0);
+}
+
+label {
+  font-size: 20px;
+}
+
+.price {
+  float: right;
+}
+
+#btnSubmit {
+  padding: 20px;
+  font-size: 15px;
+}

@@ -1,0 +1,51 @@
+/* html, body {
+    height: 100%;
+    background-image: linear-gradient(to bottom right, rgba(46,170,250,1), rgba(140,4,219));
+}
+
+div > h1 {
+    color: white;
+} */
+
+.container {
+    display: flex;
+}
+
+.color-yellow {
+    color:goldenrod;
+}
+
+.prods {
+    background-color: white;
+    margin: 40px;
+    min-width: 200px;
+    width: 20%;
+    padding: 12px 12px;
+    border: solid 1px rgb(210, 210, 210);
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.9);
+}
+.prodImages {
+    width: 200px;
+    height: 200px;
+    size: 10px;
+}
+
+.priceAndBtn {
+    display:flex;
+    align-items: center;
+}
+
+.priceAndBtn .btn {
+    margin-left: 50px;
+    width: 125px;
+    height: 75px;
+    line-height: 1.5;
+}
+
+.brand {
+    font-style: italic;
+}
+
+.price {
+    font-weight: bold;
+}

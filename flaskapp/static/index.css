@@ -1,0 +1,40 @@
+/* html, body {
+    height: 100%;
+    background-image: linear-gradient(to bottom right, rgba(46,170,250,1), rgba(140,4,219));
+} */
+
+.nav-link {
+    color: white
+}
+
+.container {
+    color: #120a3d;
+}
+
+#header {
+    background-image: url("https://www.wallpaperflare.com/static/71/214/387/nasa-galaxy-stars-sky-wallpaper.jpg");
+    background-size: cover;
+    position: relative;
+    min-height: 60vh;
+    min-width: 100%;
+    color: white;
+}
+
+#header > h1 { 
+    font: "Comic Sans";
+    font-size: 4rem;
+}
+
+#getstarted {
+    margin-top: 10px;
+    border-radius: 30px;
+    color: white;
+    height: 250px;
+    width: 500px;
+    background-color: gray;
+    /* background-color: #290a3d; */
+}
+
+.text-center > .btn {
+    margin-top: 15px;
+}
