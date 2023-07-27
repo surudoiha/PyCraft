@@ -1,9 +1,9 @@
 {% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
     content %}
-    <form method="POST">
+    <form method="POST" action="/products">
       <h3 align="center">Sign Up</h3>
       <div class="form-group">
-        <label for="email">Email Address</label>
+        <label for="inputEmail">Email Address</label>
         <input
           type="email"
           class="form-control"
@@ -12,6 +12,7 @@
           placeholder="Enter email"
         />
       </div>
+<!-- fist name, last name, password section
       <div class="form-group">
         <label for="firstName">First Name</label>
         <input
@@ -42,6 +43,7 @@
           placeholder="Confirm password"
         />
       </div>
+    -->
       <br />
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
