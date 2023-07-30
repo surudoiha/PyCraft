@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Testing DB{% endblock  %}
+
+{% block content %}
+<h1> Testing </h1>
+<h1> User: {{ user.id }}, Email {{ user.email }}</h1>
+<br>
+<h1> Prod </h1>
+{% for prod in user_cart %}
+<h1> Brand: {{ prod.brand }}, Name {{ prod.name }}, Price {{ prod.price}}, Quantity {{ prod.quantity }}</h1>
+{% endfor %}
+
+
+{% endblock  %}
