@@ -6,10 +6,16 @@
 {%block content%}
 <div class="container d-flex align-items-center justify-content-center" id="login">
     <div class="text-center">
-      <form>
+      <form method="POST">
         <div class="form-group">
           <label for="inputEmail">Email address</label>
-          <input type="email" class="form-control form-control-lg" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Enter email"
+          />
           <small id="emailHelp" class="form-text text-muted">Your email is used to keep track of your cart and orders</small>
         </div>
         <button type="submit" class="btn btn-primary btn-lg" id="btnSubmit">Submit</button>

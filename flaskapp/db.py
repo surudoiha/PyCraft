@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from flask_login import current_user
+from flask_login import current_user, UserMixin
 from flask_sqlalchemy import SQLAlchemy
 
 from . import app
@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 app.app_context().push()
 
 #Models for Tables    
-class Users(db.Model):
+class Users(UserMixin, db.Model):
    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
    email = db.Column(db.String(50), nullable = False, unique = True)
         
