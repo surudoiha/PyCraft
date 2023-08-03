@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 from flask import Blueprint, render_template
+=======
+from flask import Blueprint, render_template, session
+>>>>>>> Stashed changes
 from flask_login import current_user, UserMixin
 from flask_sqlalchemy import SQLAlchemy
 
@@ -35,7 +39,6 @@ class Cart(db.Model):
 #Testing db by just finding a user and their cart
 @db_blueprint.route("/db")
 def db_route():
-    
     # THIS CODE WORKS!
         
     # curr_user = db.get_or_404(Users, 5) #5 is the id of the Users (primary key)
