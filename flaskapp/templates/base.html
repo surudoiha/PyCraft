@@ -13,12 +13,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title%}{% endblock %}</title>
-    {%block script%} {% endblock %}
+    {%block script%}  {% endblock %}
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <body>
     <!--Navbar-->
+    {% if user == None %}
     <nav class="navbar bg-dark border-bottom border-bottom-dark navbar-expand-lg " data-bs-theme="dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">PyCraft</a>
@@ -37,21 +38,68 @@
             <li class="nav-item">
               <a class="nav-link {% if active_page == 'cart'%} active {% endif %}" aria-current="page" href="#">Cart</a>
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
               <a class="nav-link {% if active_page == 'login'%} active {% endif %}" href="login">Login</a>
-            </li>
+            </li>-->
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+          <form class="d-flex" role="search" action="/login">
+            <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+            <button class="btn btn-outline-success" type="submit" style="width: 150px;">Sign In</button>
           </form>
         </div>
       </div>
   </nav>
 
-  {%block content%} 
+
+  {%else%}
+  <nav class="navbar bg-dark border-bottom border-bottom-dark navbar-expand-lg " data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">PyCraft</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+             <!--The ifs are basically to check what page we are on so we can highlight the navbar section we're on-->
+            <a class="nav-link {% if active_page == 'index'%} active {% endif %}" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if active_page == 'products'%} active {% endif %}" href="products">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if active_page == 'cart'%} active {% endif %}" aria-current="page" href="#">Cart</a>
+          </li>
+          <!--<li class="nav-item">
+            <a class="nav-link {% if active_page == 'login'%} active {% endif %}" href="login">Login</a>
+          </li>-->
+        </ul>
+        <form class="d-flex" role="search" action="/logout">
+          <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+          <button class="btn btn-outline-success" disabled type="submit" style="width: 150px; margin-left: 5px;">{{user.email}}</button>
+          <button class="btn btn-outline-success" type="submit" style="width: 150px;">Logout</button>
+        </form>
+      </div>
+    </div>
+</nav>
+  {% endif %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+    <div class="container alert alert-dismissible fade show {{ category }} flashes d-flex align-items-center justify-content-center" 
+    role="alert" style="width: 450px; margin-top: 6px; margin-bottom: -15px;">
+      {{message}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+  {%block content%}
   {% endblock %}
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

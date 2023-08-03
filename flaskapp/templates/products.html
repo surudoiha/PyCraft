@@ -6,7 +6,7 @@
     {%block content%}
     <div class="container" id="products">
         {% for x in products%}
-        <div class="prodcontainer prods" id="prod1">
+        <div class="prodcontainer prods" id="prod{{loop.index}}">
             <img class="prodImages" src="https://static.nike.com/a/images/t_default/dd38d4b0-4acd-465b-8eff-7c5d168db71a/air-force-1-mid-07-mens-shoes-S1QClz.png" alt="">
             <div class="description">
               <h6 class="brand"><em>{{ x.brand }}</em></h6>
@@ -19,7 +19,7 @@
               <i class="bi bi-star-fill color-yellow"></i>
               <div class="priceAndBtn">
                 <h4 class="price">${{x.price}}</h4>
-                <button type="button" class="btn btn-success btn-sm" id="1"><a class="nav-link" href="">Add to Cart</a></button>
+                <button type="button" class="btn btn-success btn-sm" id="{{loop.index}}"><a class="nav-link" href="">Add to Cart</a></button>
               </div>
             </div>
           </div>
