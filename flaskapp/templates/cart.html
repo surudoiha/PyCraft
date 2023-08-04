@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% set active_page = "cart" %}
+{% block title %} My Cart {% endblock %}
+{% block content %}
+<div class="container" id="cart">
+    <h1>Your Cart</h1>
+    {% for item in cart_items %}
+    <div class="cart-item">
+        <h6 class="brand"><em>{{ item.brand }}</em></h6>
+        <h5 class="name">{{item.name}}</h5>
+        <h4 class="price">${{item.price}}</h4>
+        <p class="quantity">Quantity: {{item.quantity}}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
