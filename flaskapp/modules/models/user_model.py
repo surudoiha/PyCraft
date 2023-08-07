@@ -1,4 +1,4 @@
-from ..db import db
+from ...db import db
 from flask_login import current_user, UserMixin
 from .cart_model import Cart
 
@@ -26,6 +26,9 @@ class Users(UserMixin, db.Model):
         
     def authenticate(self):
         print()
+        
+    def add_item(self, product):
+        Cart.cart_add_item(self, product)
         
     def get_user_cart(self):
         user = Users.query.filter(Users.email == self.email).first()

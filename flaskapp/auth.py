@@ -1,12 +1,13 @@
 from flask import Blueprint, render_template, request, redirect, session, flash
 from flask_login import current_user
-from .db import db, Users, Cart
+from .db import db
 
 auth = Blueprint('auth', __name__)
+from .modules.models.user_model import Users
 
 @auth.route('/login', methods=['GET','POST'])
 def login():
-    curr_user = Users.query.filter(Users.email == session['user']).first()
+    curr_user = Users.get_user_by_email(session.get('user'))
     #If none, that means the curr_user isnt logged in, so send them to login page
     if curr_user == None:
         if request.method == 'POST':
@@ -35,12 +36,12 @@ def login():
 @auth.route('/logout')
 def logout():
     session['user'] = None
-    #return redirect('/') #just sends them back to index
-    return "<p>Logout</p>"
+    return redirect('/') #just sends them back to index
+    # return "<p>Logout</p>"
 
 @auth.route("/sign-up", methods=['GET', 'POST'])
 def sign_up():
-    curr_user = Users.query.filter(Users.email == session['user']).first() 
+    curr_user = Users.get_user_by_email(session.get('user'))
     print(curr_user)
     
     #If none, that means the curr_user isnt logged in, so send them to login page
