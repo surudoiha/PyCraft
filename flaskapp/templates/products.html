@@ -20,7 +20,7 @@
               <form method="POST">
                 <div class="priceAndBtn">
                   <h4 class="price">${{x.price}}</h4>
-                  <button type="button" class="btn btn-success btn-sm" id="{{loop.index}}"><a class="nav-link" href="{{ url_for('products.add_to_cart', product_id=loop.index) }}">Add to Cart</a></button>
+                  <button type="button" class="btn btn-success btn-sm" id="{{loop.index}}"><a class="nav-link" href="{{ url_for('products.add_to_cart', product_id=x.id) }}">Add to Cart</a></button>
                 </div>
               </form>
             </div>

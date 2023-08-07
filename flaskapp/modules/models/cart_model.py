@@ -13,6 +13,7 @@ class Cart(db.Model):
     def get_cart_items(self):
         print('')
         
+        
     def update_quantity(owner, product):
         owner_id = owner.get_id()
         query = Cart.query.filter(Cart.owner_id == owner_id, Cart.brand == product.brand, Cart.name == product.name).first()
@@ -22,6 +23,7 @@ class Cart(db.Model):
             db.session.commit()
         except:
             print('error updating quantity')
+        
         
     def cart_add_item(owner, product):
         #check if the user already has it
@@ -42,6 +44,7 @@ class Cart(db.Model):
         print()
         
     def already_in_cart(owner_id, product):
+        #will be None if not in cart
         query = Cart.query.filter(Cart.owner_id == owner_id, Cart.brand == product.brand, 
                                   Cart.name == product.name).first()
         if query == None:
