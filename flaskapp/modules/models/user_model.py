@@ -21,13 +21,14 @@ class Users(UserMixin, db.Model):
             return True
         
     def register_user(self):
-        #query DB anda add the user
+        #query DB and add the user
         print()
         
     def authenticate(self):
         print()
         
     def add_item(self, product):
+        #deligation
         Cart.cart_add_item(self, product)
         
     def get_user_cart(self):

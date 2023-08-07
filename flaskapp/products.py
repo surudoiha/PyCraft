@@ -22,17 +22,11 @@ def add_to_cart(product_id):
     else:
         print('ran for {x}'.format(x=product_id) )
         if 1 <= product_id <= len(prods)+1:
-            print("inside add_to_cart if ")
-            selected_prod = Products.get_prod_by_id(prods, product_id)
-            if selected_prod != None:
-                curr_user.add_item(selected_prod)
-                flash("Product added successfully", "alert-success")
-        # if product_id is not None and 0 <= product_id < len(prods):
-        #     product = prods[product_id]
-        #     cart_item = Cart(owner_id=curr_user.id, brand=product.brand, name=product.name, price=product.price, quantity=1)
-        #     db.session.add(cart_item)
-        #     db.session.commit()
-        #     flash("Product added successfully", "alert-success") 
+            print("inside add_to_cart if")
+            selected_prod = prods[product_id-1]
+            print(selected_prod)
+            curr_user.add_item(selected_prod)
+            flash("Product added successfully", "alert-success")
 
     return redirect(url_for('products.products'))
 
@@ -42,6 +36,7 @@ def products():
     if curr_user == None:
         return redirect('/login')
     else:
+        print("0:{a} 1:{b} 2:{c} 3:{d}".format(a=prods[0].id, b=prods[1].id, c=prods[2].id, d=prods[3].id))
         if request.method == 'POST':
             if request.form['1']:
                 print('btn 1 pressed')
