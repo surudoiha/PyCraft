@@ -1,51 +1,58 @@
-from flask import Blueprint, render_template, session, redirect, url_for
+from flask import Blueprint, render_template, session, redirect, url_for, request
 from flask_login import current_user
 from flask import flash
 
 
-
-from .db import db, Users, Cart
+from .db import db
+from .modules.models.user_model import Users
+from .modules.models.product_model import Products
+from .modules.models.cart_model import Cart
 
 products_blueprint = Blueprint('products', __name__)
-
-class Products():
-    def __init__(self, name, brand, price):
-        self.name = name
-        self.brand = brand
-        self.price = price
     
 prods = [Products("Shoe", "Nike", 129.99), Products("Shirt", "Adidas", 199.99), 
          Products("Mrbeast", "YT", 399.99), Products("Mrbeast2", "YT", 399.99)]
 
-@products_blueprint.route("/products/add_to_cart/<int:product_id>", methods=['GET'])
+#Adds Product to DB
+@products_blueprint.route("/products/add_to_cart/<int:product_id>", methods=['GET','POST'])
 def add_to_cart(product_id):
-    curr_user = Users.query.filter(Users.email == session.get('user')).first()
+    curr_user = Users.get_user_by_email(session.get('user'))
     if curr_user == None:
         return redirect('/login')
     else:
-        if product_id is not None and 0 <= product_id < len(prods):
-            product = prods[product_id]
-            cart_item = Cart(owner_id=curr_user.id, brand=product.brand, name=product.name, price=product.price, quantity=1)
-            db.session.add(cart_item)
-            db.session.commit()
-            flash("Product added successfully", "alert-success") 
+        print('ran for {x}'.format(x=product_id) )
+        if 1 <= product_id <= len(prods)+1:
+            print("inside add_to_cart if ")
+            selected_prod = Products.get_prod_by_id(prods, product_id)
+            if selected_prod != None:
+                curr_user.add_item(selected_prod)
+                flash("Product added successfully", "alert-success")
+        # if product_id is not None and 0 <= product_id < len(prods):
+        #     product = prods[product_id]
+        #     cart_item = Cart(owner_id=curr_user.id, brand=product.brand, name=product.name, price=product.price, quantity=1)
+        #     db.session.add(cart_item)
+        #     db.session.commit()
+        #     flash("Product added successfully", "alert-success") 
 
     return redirect(url_for('products.products'))
 
 @products_blueprint.route("/products")
 def products():
-    curr_user = Users.query.filter(Users.email == session.get('user')).first()
+    curr_user = Users.get_user_by_email(session.get('user'))
     if curr_user == None:
         return redirect('/login')
     else:
+        if request.method == 'POST':
+            if request.form['1']:
+                print('btn 1 pressed')
+            elif request.form['2']:
+                print('btn 2 pressed')
+            elif request.form['3']:
+                print('btn 3 pressed')
+            elif request.form['4']:
+                print('btn 4 pressed')
         print(curr_user)
+        print(prods[1].id)
         return render_template("products.html", products = prods, user=curr_user)
     
-@products_blueprint.route("/cart")
-def cart():
-    curr_user = Users.query.filter(Users.email == session.get('user')).first()
-    if curr_user == None:
-        return redirect('/login')
-    else:
-        cart_items = Cart.query.filter(Cart.owner_id == curr_user.id).all()
-        return render_template("cart.html", cart_items=cart_items, user=curr_user)
+

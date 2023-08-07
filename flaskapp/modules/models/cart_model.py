@@ -1,4 +1,4 @@
-from ..db import db
+from ...db import db
 class Cart(db.Model):
     cart_id = db.Column(db.Integer, primary_key = True, autoincrement=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -13,10 +13,43 @@ class Cart(db.Model):
     def get_cart_items(self):
         print('')
         
-    def add_product():
-        print('')
+    def update_quantity(owner, product):
+        owner_id = owner.get_id()
+        query = Cart.query.filter(Cart.owner_id == owner_id, Cart.brand == product.brand, Cart.name == product.name).first()
         
-    def remove_product():
+        query.quantity = query.quantity + 1
+        try:
+            db.session.commit()
+        except:
+            print('error updating quantity')
+        
+    def cart_add_item(owner, product):
+        #check if the user already has it
+        #if they do, just ugpdate the quantity +1
+        owner_id = owner.get_id()
+        if Cart.already_in_cart(owner_id, product) == True:
+            Cart.update_quantity(owner, product)
+            print("item quantity changed")
+        else:
+            added_item = Cart(owner_id = owner_id, brand=product.brand, name=product.name, price=product.price, quantity = 1)
+            print(added_item.owner_id)
+            print(owner.get_id())
+            db.session.add(added_item)
+            db.session.commit()
+            print("item added")
+        
+    def remove_item():
         print()
+        
+    def already_in_cart(owner_id, product):
+        query = Cart.query.filter(Cart.owner_id == owner_id, Cart.brand == product.brand, 
+                                  Cart.name == product.name).first()
+        if query == None:
+            return False
+        else:
+            return True
+        
     
+        
+        
     

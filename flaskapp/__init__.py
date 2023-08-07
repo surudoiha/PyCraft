@@ -11,11 +11,13 @@ def create_app():
     from .auth import auth
     from .products import products_blueprint
     from .db import db_blueprint
+    from .cart import cart_blueprint
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
     app.register_blueprint(products_blueprint)
     app.register_blueprint(db_blueprint)
+    app.register_blueprint(cart_blueprint)
 
 
     return app

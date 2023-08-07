@@ -1,0 +1,13 @@
+table, th, td, tr {
+    border: 1px solid black;
+}
+
+tbody tr:nth-child(even)
+{
+    border-style: solid;
+}
+
+tbody tr:nth-child(odd){
+    border-style: solid;
+}
+
