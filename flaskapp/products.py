@@ -22,11 +22,17 @@ def add_to_cart(product_id):
     else:
         print('ran for {x}'.format(x=product_id) )
         if 1 <= product_id <= len(prods)+1:
-            print("inside add_to_cart if")
+            print("inside add_to_cart if ")
             selected_prod = prods[product_id-1]
-            print(selected_prod)
-            curr_user.add_item(selected_prod)
-            flash("Product added successfully", "alert-success")
+            if selected_prod != None:
+                curr_user.add_item(selected_prod)
+                flash("Product added successfully", "alert-success")
+        # if product_id is not None and 0 <= product_id < len(prods):
+        #     product = prods[product_id]
+        #     cart_item = Cart(owner_id=curr_user.id, brand=product.brand, name=product.name, price=product.price, quantity=1)
+        #     db.session.add(cart_item)
+        #     db.session.commit()
+        #     flash("Product added successfully", "alert-success") 
 
     return redirect(url_for('products.products'))
 
