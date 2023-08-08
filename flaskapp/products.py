@@ -42,17 +42,6 @@ def products():
     if curr_user == None:
         return redirect('/login')
     else:
-        if request.method == 'POST':
-            if request.form['1']:
-                print('btn 1 pressed')
-            elif request.form['2']:
-                print('btn 2 pressed')
-            elif request.form['3']:
-                print('btn 3 pressed')
-            elif request.form['4']:
-                print('btn 4 pressed')
-        print(curr_user)
-        print(prods[1].id)
         return render_template("products.html", products = prods, user=curr_user)
     
 

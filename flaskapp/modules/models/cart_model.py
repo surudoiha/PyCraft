@@ -23,6 +23,19 @@ class Cart(db.Model):
         except:
             print('error updating quantity')
         
+    def update_cart_quantity(owner, item, new_quantity):
+        owner_id = owner.get_id()
+        #gets the item
+        user_item = Cart.query.filter(Cart.owner_id == owner_id, Cart.brand == item.brand, Cart.name == item.name).first()
+        
+        #updates its quantity
+        user_item.quantity = new_quantity
+        try:
+            db.session.commit()
+        except:
+            print('error updating quantity')
+        
+        
     def cart_add_item(owner, product):
         #check if the user already has it
         #if they do, just ugpdate the quantity +1
@@ -38,8 +51,9 @@ class Cart(db.Model):
             db.session.commit()
             print("item added")
         
-    def remove_item():
-        print()
+    def remove_item(id_to_remove):
+        Cart.query.filter(Cart.cart_id == id_to_remove).delete()
+        db.session.commit()
         
     def already_in_cart(owner_id, product):
         query = Cart.query.filter(Cart.owner_id == owner_id, Cart.brand == product.brand, 
