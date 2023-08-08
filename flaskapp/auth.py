@@ -37,7 +37,6 @@ def login():
 def logout():
     session['user'] = None
     return redirect('/') #just sends them back to index
-    # return "<p>Logout</p>"
 
 @auth.route("/sign-up", methods=['GET', 'POST'])
 def sign_up():

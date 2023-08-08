@@ -11,3 +11,11 @@ tbody tr:nth-child(odd){
     border-style: solid;
 }
 
+.btn-td-cell {
+    width: 1px;
+    white-space: nowrap;
+}
+
+.userCart {
+    margin-top: 20px;
+}

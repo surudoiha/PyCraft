@@ -7,8 +7,7 @@ from . import app
 
 db_blueprint = Blueprint('db', __name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://root:password@localhost/omg'
-#app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://sql9635613:aL1s9kYG4G@sql9.freemysqlhosting.net:3306/sql9635613'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://sql9635613:aL1s9kYG4G@sql9.freemysqlhosting.net:3306/sql9635613'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
 #initialize DB

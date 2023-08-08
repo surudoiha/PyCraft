@@ -7,6 +7,8 @@ class Products():
         self.name = name
         self.brand = brand
         self.price = price
+        self.image = "https://static.nike.com/a/images/t_default/dd38d4b0-4acd-465b-8eff-7c5d168db71a/air-force-1-mid-07-mens-shoes-S1QClz.png"
+    
     
     def get_name(self):
         return self.name
@@ -18,6 +20,7 @@ class Products():
         return self.id
     
     def get_prod_by_id(prod_list, prod_id):
+        #for loop that returns index of prod
         for i in range(len(prod_list)):
             if prod_list[i].id == prod_id:
                 return prod_list[i]
@@ -25,5 +28,4 @@ class Products():
                 return None
     
     def save_to_product_list(product, list):
-        
         list.extend(product)
