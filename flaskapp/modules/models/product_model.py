@@ -19,7 +19,18 @@ class Products():
     def get_id(self):
         return self.id
     
+
     def get_prod_by_id(prod_list, prod_id):
+        """_summary_
+            Searches for a product by its id in a list
+            
+        Args:
+            prod_list (List): the list of the products on the website
+            prod_id (int): id of the product you're looking for
+
+        Returns:
+            _type_: int
+        """
         #for loop that returns index of prod
         for i in range(len(prod_list)):
             if prod_list[i].id == prod_id:
@@ -28,4 +39,5 @@ class Products():
                 return None
     
     def save_to_product_list(product, list):
+
         list.extend(product)
