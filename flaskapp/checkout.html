@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% set active_page = "checkout" %}
+{% block title %} Checkout {% endblock %}
+{%block script%} <link rel="stylesheet" href="../static/checkout.css"> {% endblock %}
+
+{% block content %}
+
+<div class="container d-flex align-items-center justify-content-center" id="checkout-form">
+    <div class="text-center left-side">
+        <form>
+            <div class="form-group billing-form">
+                <h2>Billing Information</h2>
+                <div class="row">
+                    <div class="col">
+                        <label for="inputFName"><i class="bi bi-person-fill"></i>First Name</label>
+                        <input type="text" class="form-control " id="inputFName" aria-describedby="nameHelp" placeholder="First name" required>
+                    </div>
+                    <div class="col">
+                        <label for="inputLName">Last Name</label>
+                        <input type="text" class="form-control " id="inputLName" aria-describedby="nameHelp" placeholder="Last name" required>
+                    </div>
+                    <!-- <div class="col">
+                        <label for="inputEmail">Email address</label>
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email ">
+                    </div> -->
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                       <label for="inputAddress"><i class="bi bi-house-door-fill"></i>Address</label>
+                       <input type="text" class="form-control " id="inputAddress" aria-describedby="addressHelp" placeholder="123 Apple St." required>
+                    </div>
+                    <div class="col">
+                        <label for="inputCity"><i class="bi bi-buildings-fill"></i>City</label>
+                        <input type="text" class="form-control " id="inputCity" aria-describedby="cityHelp" placeholder="Los Angeles" required>
+                    </div>
+                    <div class="col">
+                        <label for="inputZip"><i class="bi bi-geo-fill"></i>Zip</label>
+                        <input type="number" class="form-control " id="inputZip" aria-describedby="zipHelp" placeholder="00000" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group payment-form">
+                <h2>Payment Information</h2>
+                <h5>Payment Methods (put a pic of like visa, etc)</h5>
+                <div class="row">
+                    <div class="col">
+                        <label for="inputCardName">Name on Card</label>
+                        <input type="text" class="form-control " id="inputCardName" aria-describedby="expDateHelp" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="col">
+                        <label for="inputCC"><i class="bi bi-credit-card-2-front-fill"></i>Credit Card Numbers</label>
+                        <input type="number" class="form-control " id="inputCC" aria-describedby="CCHelp" placeholder="123 456 7890" required>
+                    </div>                        
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="inputCIV">CV</label>
+                        <input type="number" class="form-control " id="inputCC" aria-describedby="CCHelp" placeholder="XXX" required>
+                    </div>
+
+                    <div class="col">
+                        <label for="inputExpDate">Exp. Date</label>
+                        <input type="text" class="form-control " id="inputExpDate" aria-describedby="expDateHelp" placeholder="XX/XX" required>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container shipping_options">
+              <div class="form-check ">
+                <input class="form-check-input" value=5.00 type="radio" name="flexRadioDefault" id="flexRadioDefault1" onclick="updateValue(this)" checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                  USPS Priority Mail ($5, 5-Day Shipping)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" value=15.00 type="radio" name="flexRadioDefault" id="flexRadioDefault2" onclick="updateValue(this)">
+                <label class="form-check-label" for="flexRadioDefault2">
+                  First-Class Mail ($15, Overnight Shipping)
+                </label>
+              </div>
+            </div>
+            
+        </form>            
+    </div>
+
+    <div class="verticalLine"></div>
+    <div class="container right-side">
+      <h2>Cart <i class="bi bi-cart3"></i></h2>
+      <br>
+      {% for item in cart_items %}
+      <h4>{{ item.name }} <span class="price">${{ item.price * item.quantity }}</span></h4>
+      {% endfor %}
+      <br>
+      <hr class="horizontalLine">
+      <h4>Order: $<span id="orderCost" name="orderCost">{{ order_cost }}</span></h4>
+      <h4>Taxes: $<span id="taxes" name="taxes">{{ taxes }}</span></h4>
+      <h4 >Shipping: $<span id="shippingCost" name="shippingCost">5.00</span></h4>
+      <br>
+      <hr class="horizontalLine">
+      <h3> Total Order: $<span id="totalOrder" name="totalOrder">{{ total_order }}</span></h3>
+        <br>
+        <button type="submit" class="btn btn-primary btn-group-lg" id="btnSubmit">Place Order</button>
+
+    </div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+{%block js %}
+<script>
+    function updateValue(radio) {
+        var shippingCost = parseFloat(radio.value);
+        document.getElementById('shippingCost').innerHTML = shippingCost.toFixed(2);
+        
+        var orderCost = parseFloat(document.getElementById('orderCost').innerHTML);
+        var taxes = parseFloat(document.getElementById('taxes').innerHTML);
+        var totalOrder = orderCost + taxes + shippingCost;
+        
+        document.getElementById('totalOrder').innerHTML = totalOrder.toFixed(2);
+    }
+    </script>
+<script src="../static/update.js"></script> {%endblock%}
