@@ -2,9 +2,7 @@ from ...db import db
 class Cart(db.Model):
     cart_id = db.Column(db.Integer, primary_key = True, autoincrement=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    brand = db.Column(db.String(50))
-    name = db.Column(db.String(50))
-    price = db.Column(db.Float)
+    product = db.Column(db.Integer, db.ForeignKey('products.prod_id'))
     quantity = db.Column(db.Integer)
     
     def __repr__(self):
@@ -13,7 +11,7 @@ class Cart(db.Model):
     def get_cart_items(self):
         print('')
         
-    def update_quantity_by_1(owner, product):
+    def update_quantity_by_1(owner, item):
         """_summary_
             Will update the quantity of an item in the users cart by 1.
             
@@ -22,7 +20,7 @@ class Cart(db.Model):
             product (Product): The product we are updating the quantity for
         """
         owner_id = owner.get_id()
-        query = Cart.query.filter(Cart.owner_id == owner_id, Cart.brand == product.brand, Cart.name == product.name).first()
+        query = Cart.query.filter(Cart.owner_id == owner_id, Cart.product == item.prod_id).first()
         
         query.quantity = query.quantity + 1
         try:
@@ -41,7 +39,7 @@ class Cart(db.Model):
         """
         owner_id = owner.get_id()
         #gets the item
-        user_item = Cart.query.filter(Cart.owner_id == owner_id, Cart.brand == item.brand, Cart.name == item.name).first()
+        user_item = Cart.query.filter(Cart.owner_id == owner_id, Cart.product == item.product).first()
         
         #updates its quantity
         user_item.quantity = new_quantity
@@ -51,23 +49,21 @@ class Cart(db.Model):
             print('error updating quantity')
         
         
-    def cart_add_item(owner, product):
+    def cart_add_item(owner, item):
         """_summary_
             Creating a cart obj to hold the item the user wants to add to their cart
         Args:
             owner (Users): User that we are adding the product to their cart
-            product (Product): The product we are adding
+            product (Product): The product we are adding to cart
         """
         #check if the user already has it
         #if they do, just ugpdate the quantity +1
         owner_id = owner.get_id()
-        if Cart.already_in_cart(owner_id, product) == True:
-            Cart.update_quantity_by_1(owner, product)
+        if Cart.already_in_cart(owner_id, item) == True:
+            Cart.update_quantity_by_1(owner, item)
             print("item quantity changed")
         else:
-            added_item = Cart(owner_id = owner_id, brand=product.brand, name=product.name, price=product.price, quantity = 1)
-            print(added_item.owner_id)
-            print(owner.get_id())
+            added_item = Cart(owner_id = owner_id, product=item.prod_id, quantity = 1)
             db.session.add(added_item)
             db.session.commit()
             print("item added")
@@ -92,8 +88,7 @@ class Cart(db.Model):
         Returns:
             boolean: True if in cart, False if not in cart
         """
-        query = Cart.query.filter(Cart.owner_id == owner_id, Cart.brand == product.brand, 
-                                  Cart.name == product.name).first()
+        query = Cart.query.filter(Cart.owner_id == owner_id, Cart.product == product.prod_id).first()
         if query == None:
             return False
         else:

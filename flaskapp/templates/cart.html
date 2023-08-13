@@ -19,9 +19,9 @@
       <tbody>
         {% for item in cart_items %}
         <tr>
-          <td>{{ item.brand }}</td>
-          <td>{{item.name}}</td>
-          <td>${{item.price}}</td>
+          <td>{{ products[item.product-1].brand }}</td>
+          <td>{{products[item.product-1].name}}</td>
+          <td>${{products[item.product-1].price}}</td>
           <td>{{item.quantity}}</td>
           <form method="POST" action="{{ url_for('cart.update_cart', cart_id=item.cart_id) }}">
             <td class="btn-td-cell"><button type="submit" class="btn btn-warning" href="{{ url_for('cart.update_cart', cart_id=item.cart_id) }}">
