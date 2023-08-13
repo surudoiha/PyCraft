@@ -1,14 +1,14 @@
 product_id = 0
-class Products():
-    def __init__(self, name, brand, price):
-        global product_id
-        product_id = product_id + 1
-        self.id = product_id
-        self.name = name
-        self.brand = brand
-        self.price = price
-        self.image = "https://static.nike.com/a/images/t_default/dd38d4b0-4acd-465b-8eff-7c5d168db71a/air-force-1-mid-07-mens-shoes-S1QClz.png"
+from ...db import db
+class Products(db.Model):
+    prod_id = db.Column(db.Integer, primary_key = True, autoincrement=True)
+    brand = db.Column(db.String(50))
+    name = db.Column(db.String(50))
+    price = db.Column(db.Float)
+    image = db.Column(db.String(255))
     
+    def __repr__(self):
+        return f'<Product ID: {self.prod_id}, Brand+Name+Price: {self.brand} {self.name} {self.price}>'
     
     def get_name(self):
         return self.name
@@ -38,6 +38,21 @@ class Products():
             else:
                 return None
     
+    def get_prod_list():
+        return Products.query.order_by(Products.prod_id.asc()).all()
+    
     def save_to_product_list(product, list):
 
         list.extend(product)
+    
+    def add_prod(brand, name, price):
+        default_img = "https://static.nike.com/a/images/t_default/dd38d4b0-4acd-465b-8eff-7c5d168db71a/air-force-1-mid-07-mens-shoes-S1QClz.png"
+        product = Products(brand=brand, name=name, price=price, image=default_img)
+        db.session.add(product)
+        db.session.commit()
+    
+    
+    def remove_extra(id):
+        Products.query.filter(Products.prod_id == id).delete()
+        db.session.commit()
+

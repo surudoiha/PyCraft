@@ -9,10 +9,6 @@ h1 {
   margin-top: 20px;
 }
 
-.billingTxt {
-  margin-top: 30px;
-}
-
 .form-group {
     margin-bottom: 50px;
 }
@@ -33,16 +29,15 @@ h1 {
 }
 
 .right-side {
-  width: 200px;
-  flex: 40%;
+  width: 40%;
   float: right;
 }
 
 .verticalLine {
-  margin-left: 20px;
+   margin-left: 20px;
   padding-left: 20px;
   border-left: 6px solid rgba(0, 0, 0, 0.201);
-  height: 500px;
+  height: 400px;
 }
 
 hr.horizontalLine {
@@ -61,4 +56,8 @@ label {
 #btnSubmit {
   padding: 20px;
   font-size: 15px;
+}
+
+.shipping_options {
+  background-color: rgba(0, 0, 0, 0.1);
 }
