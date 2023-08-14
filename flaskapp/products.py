@@ -9,9 +9,7 @@ from .modules.models.product_model import Products
 from .modules.models.cart_model import Cart
 
 products_blueprint = Blueprint('products', __name__)
-    
-prods = [Products("Shoe", "Nike", 129.99), Products("Shirt", "Adidas", 199.99), 
-         Products("Mrbeast", "YT", 399.99), Products("Mrbeast2", "YT", 399.99)]
+prods = Products.get_prod_list()
 
 #Adds Product to DB
 @products_blueprint.route("/products/add_to_cart/<int:product_id>", methods=['GET','POST'])
@@ -42,6 +40,8 @@ def products():
     if curr_user == None:
         return redirect('/login')
     else:
+        for prod in prods:
+            print(prod)
         return render_template("products.html", products = prods, user=curr_user)
     
 

@@ -9,11 +9,26 @@ class Users(UserMixin, db.Model):
     def __repr__(self):
             return f'<User: {self.id}, Email:{self.email}>'
         
+    
     def get_user_by_email(email):
+        """_summary_
+            Gets the user by their email
+        Args:
+            email (string): email of user you're getting from db
+
+        Returns:
+            Users: returns the user obj in the db
+        """
         user = Users.query.filter(Users.email == email).first()
         return user
     
     def in_database(self):
+        """_summary_
+            Checks to see if the user is in the database
+
+        Returns:
+            boolean: True if in db, False if not in db
+        """
         user = Users.query.filter(Users.email == self.email).first()
         if user == None:
             return False
@@ -28,10 +43,21 @@ class Users(UserMixin, db.Model):
         print()
         
     def add_item(self, product):
+        """_summary_
+            Adds an item to the user's cart.
+            
+        Args:
+            product (Product): The product we are adding
+        """
         #deligation
         Cart.cart_add_item(self, product)
         
     def get_user_cart(self):
+        """_summary_
+            Gets the users cart and all the items in it
+        Returns:
+            Cart[]: The cart list of all the cart objs in it
+        """
         user = Users.query.filter(Users.email == self.email).first()
         user_cart = Cart.query.filter(Cart.owner_id == user.id).all()
         return user_cart
