@@ -58,6 +58,12 @@
             <a class="nav-link {% if active_page == 'cart'%} active {% endif %}" href="{{url_for('cart.cart')}}">Cart</a>
           </li>
         </ul>
+
+        <form method="POST" action="{{url_for('auth.search')}}" class ="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="=Search", name="searched">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+
         <form class="d-flex" role="search" action="/logout">
           <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
           <button class="btn btn-outline-success" disabled type="submit" style="width: 150px; margin-left: 5px;">{{user.email}}</button>

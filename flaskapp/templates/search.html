@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% set active_page = "search" %}
+    {% block title %} Search {% endblock %}
+    {%block script%} <link rel="stylesheet" href="../static/products.css"> {% endblock %}
+
+    {%block content%}
+    
+        {% if search_results == [] %}
+          <div class="container d-flex justify-content-center align-items-center" id="cart">
+            <h3> No items were found under {{search_item}}</h3>
+          </div>
+        {% else %}
+            <div class="container" id="products">
+                {% for x in search_results%}
+
+                    <div class="prodcontainer prods" id="prod{{loop.index}}">
+                    <img class="prodImages" src="{{x.image}}" alt="">
+                    <div class="description">
+                        <h6 class="brand"><em>{{ x.brand }}</em></h6>
+                        <h5 class="name">{{x.name}}</h5>
+                        <!-- Stars -->
+                        <i class="bi bi-star-fill color-yellow"></i>
+                        <i class="bi bi-star-fill color-yellow"></i>
+                        <i class="bi bi-star-fill color-yellow"></i>
+                        <i class="bi bi-star-fill color-yellow"></i>
+                        <i class="bi bi-star-fill color-yellow"></i>
+                        <form method="POST">
+                        <div class="priceAndBtn">
+                            <h4 class="price">${{x.price}}</h4>
+                            <button type="button" class="btn btn-success btn-sm" id="{{loop.index}}"><a class="nav-link" href="{{ url_for('products.add_to_cart', product_id=x.prod_id) }}">Add to Cart</a></button>
+                        </div>
+                        </form>
+                    </div>
+                    </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+
+    
+    {% endblock %}
