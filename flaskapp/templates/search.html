@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <!-- add more content -->
+  <h1>Search Results</h1>
+  {% if search_results %}
+    <div class="search-results">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in search_results %}
+                <tr>
+                    <td>{{ result[0] }}</td>
+                    <td>{{ result[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+{% endblock %}

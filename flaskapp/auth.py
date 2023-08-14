@@ -1,9 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, session, flash
+from flask import Blueprint, render_template, request, redirect, session, flash, jsonify
 from flask_login import current_user
 from .db import db
+from sqlalchemy import or_
 
 auth = Blueprint('auth', __name__)
 from .modules.models.user_model import Users
+from .modules.models.product_model import Products 
 
 @auth.route('/login', methods=['GET','POST'])
 def login():
@@ -71,3 +73,21 @@ def sign_up():
         
 
     return render_template("sign_up.html", user = curr_user)
+
+
+@auth.route("/search", methods=['GET', 'POST'])
+def search():
+    curr_user = Users.get_user_by_email(session.get('user'))
+    if curr_user == None:
+        return redirect('/login')
+    else:
+
+        if request.method == 'POST':
+            search_item = request.form.get('searched')
+
+            if search_item:
+                search_results = Products.query.filter(Products.get_name.ilike('%' + search_item + '%')).with_entities(Products.get_id, Products.get_name).all()
+
+                return render_template('search.html', search_results=search_results)
+
+        return render_template('search.html', results=[], user=curr_user)

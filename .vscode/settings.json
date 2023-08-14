@@ -11,6 +11,19 @@
             "username": "sql9635613",
             "database": "sql9635613",
             "name": "db"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "local",
+            "database": "MySQL80",
+            "username": "root",
+            "password": "sql9635613"
         }
     ]
 }
