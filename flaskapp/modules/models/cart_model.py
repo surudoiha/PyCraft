@@ -1,3 +1,19 @@
+""" Class Name: Products
+
+    Date Created: 08/03/2023
+    Date Last Updated: 08/10/2023
+    Programmer: Ronny Almahdi
+    
+    Description of class:
+    This class is to add items to a users cart and to do updating, searching,
+    deleting, and adding items to the users cart.
+    
+    No important Data Structures
+    
+    No algorithms used here
+    
+"""
+
 from ...db import db
 class Cart(db.Model):
     cart_id = db.Column(db.Integer, primary_key = True, autoincrement=True)
@@ -12,8 +28,7 @@ class Cart(db.Model):
         print('')
         
     def update_quantity_by_1(owner, item):
-        """_summary_
-            Will update the quantity of an item in the users cart by 1.
+        """Will update the quantity of an item in the users cart by 1.
             
         Args:
             owner (Users): User that we are updating the product's quantity in their cart
@@ -29,8 +44,7 @@ class Cart(db.Model):
             print('error updating quantity')
         
     def update_cart_quantity(owner, item, new_quantity):
-        """_summary_
-            Updating cart's quanity to a new quantity
+        """Updating cart's quanity to a new quantity
             
         Args:
             owner (Users): User that we are updating the product's quantity in their cart
@@ -50,12 +64,13 @@ class Cart(db.Model):
         
         
     def cart_add_item(owner, item):
-        """_summary_
-            Creating a cart obj to hold the item the user wants to add to their cart
+        """Creating a cart obj to hold the item the user wants to add to their cart
+        
         Args:
             owner (Users): User that we are adding the product to their cart
             product (Product): The product we are adding to cart
         """
+        
         #check if the user already has it
         #if they do, just ugpdate the quantity +1
         owner_id = owner.get_id()
@@ -69,8 +84,8 @@ class Cart(db.Model):
             print("item added")
         
     def remove_item(id_to_remove):
-        """_summary_
-            Removes an item from the user's cart
+        """Removes an item from the user's cart
+        
         Args:
             id_to_remove (int): The cart's id of the item to remove
         """
@@ -78,8 +93,7 @@ class Cart(db.Model):
         db.session.commit()
         
     def already_in_cart(owner_id, product):
-        """_summary_
-            Checks to see if the product is already in the users cart
+        """Checks to see if the product is already in the users cart
             
         Args:
             owner_id (int): The id of the user's cart we are checking

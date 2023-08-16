@@ -1,3 +1,19 @@
+""" Module Name: db.py
+
+    Date Created: 07/30/2023
+    Date Last Updated: 07/31/2023
+    Programmer: Ronny Almahdi
+    
+    Description of class:
+    This class is the class that holds the important information of the database,
+    starts up the database, and has a testing route
+    
+    No important Data Structures
+    
+    No algorithms used here
+    
+"""
+
 from flask import Blueprint, render_template, session
 from flask_login import current_user, UserMixin
 from flask_sqlalchemy import SQLAlchemy
@@ -18,10 +34,8 @@ from .modules.models.user_model import Users
 from .modules.models.cart_model import Cart
 
 #Testing db by just finding a user and their cart
-@db_blueprint.route("/db")
-def db_route():
-    # THIS CODE WORKS!
-        
+@db_blueprint.route("/test-db")
+def db_route():  
     # curr_user = db.get_or_404(Users, 5) #5 is the id of the Users (primary key)
     curr_user = Users.query.filter(Users.email == "test@csun.com").first()
     curr_user_cart = Cart.query.filter(Cart.owner_id == curr_user.id).all()
