@@ -1,3 +1,14 @@
+"""
+products.py
+
+Date: 08/12/2023
+
+Programmer's name: Suren Tumasyan, Ronny Almahdi
+
+Description: Adds and displays products.
+
+"""
+
 from flask import Blueprint, render_template, session, redirect, url_for, request
 from flask_login import current_user
 from flask import flash
@@ -14,6 +25,14 @@ prods = Products.get_prod_list()
 #Adds Product to DB
 @products_blueprint.route("/products/add_to_cart/<int:product_id>", methods=['GET','POST'])
 def add_to_cart(product_id):
+    """Adds a product to the user's cart.
+    
+    Args:
+        product_id (int): ID of the product to be added to the cart.
+        
+    Returns:
+        Response: Redirects to login page if user is not logged in or displays appropriate messages.
+    """
     curr_user = Users.get_user_by_email(session.get('user'))
     if curr_user == None:
         return redirect('/login')
@@ -36,6 +55,14 @@ def add_to_cart(product_id):
 
 @products_blueprint.route("/products")
 def products():
+    """Displays the list of products on the products page.
+    
+    If the user is not logged in, redirects them to the login page. Otherwise, it retrieves
+    the list of products and renders the products page with the list of products and the user's information.
+    
+    Returns:
+        str: Rendered HTML template with the list of products or a redirect to the login page.
+    """
     curr_user = Users.get_user_by_email(session.get('user'))
     if curr_user == None:
         return redirect('/login')
