@@ -8,6 +8,11 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def home():
+    """Renders the home page and displays user information.
+    
+    Returns:
+        str: Rendered HTML template with user information or anonymous user if not logged in.
+    """
     curr_user = Users.get_user_by_email(session.get('user'))
     print(curr_user)
     return render_template("index.html", user=curr_user)
