@@ -1,3 +1,19 @@
+""" Class Name: Users
+
+    Date Created: 07/23/2023
+    Date Last Updated: 08/01/2023
+    Programmer: Ronny Almahdi
+    
+    Description of class:
+    This class is for the main User creation and functions needed for a
+    customer to be able to do most of their shopping and ordering.
+    
+    No important Data Structures
+    
+    No algorithms used here
+"""
+
+
 from ...db import db
 from flask_login import current_user, UserMixin
 from .cart_model import Cart
@@ -11,8 +27,8 @@ class Users(UserMixin, db.Model):
         
     
     def get_user_by_email(email):
-        """_summary_
-            Gets the user by their email
+        """Gets the user by their email
+        
         Args:
             email (string): email of user you're getting from db
 
@@ -23,8 +39,7 @@ class Users(UserMixin, db.Model):
         return user
     
     def in_database(self):
-        """_summary_
-            Checks to see if the user is in the database
+        """Checks to see if the user is in the database
 
         Returns:
             boolean: True if in db, False if not in db
@@ -43,8 +58,7 @@ class Users(UserMixin, db.Model):
         print()
         
     def add_item(self, product):
-        """_summary_
-            Adds an item to the user's cart.
+        """Adds an item to the user's cart.
             
         Args:
             product (Product): The product we are adding
@@ -53,8 +67,8 @@ class Users(UserMixin, db.Model):
         Cart.cart_add_item(self, product)
         
     def get_user_cart(self):
-        """_summary_
-            Gets the users cart and all the items in it
+        """Gets the users cart and all the items in it
+        
         Returns:
             Cart[]: The cart list of all the cart objs in it
         """
