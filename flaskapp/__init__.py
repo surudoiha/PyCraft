@@ -1,10 +1,26 @@
+"""
+__init__.py
+
+Date: 08/05/2023
+
+Programmer's name: Suren Tumasyan, Ronny Almahdi
+
+Description: Creates and configures the Flask application
+
+"""
+
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
 
-def create_app():    
+def create_app():
+    """Creates and configures the Flask application.
+    
+    Returns:
+        Flask: Configured Flask application instance.
+    """
     app.config['SECRET_KEY'] = 'thisissecretkey'       
     
     from .views import views

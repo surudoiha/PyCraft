@@ -1,3 +1,14 @@
+"""
+auth.py
+
+Date: 08/12/2023
+
+Programmer's name: Suren Tumasyan, Ronny Almahdi
+
+Description: handles routes and authentification
+
+"""
+
 from flask import Blueprint, render_template, request, redirect, session, flash, jsonify
 from flask_login import current_user
 from .db import db
@@ -8,6 +19,16 @@ from .modules.models.product_model import Products
 
 @auth.route('/login', methods=['GET','POST'])
 def login():
+    """Handles user login process.
+    
+    If the user is not logged in, the function either displays the login form (GET request)
+    or processes the submitted form data to authenticate and log in the user (POST request).
+    If the user is already logged in, they are redirected to the products page.
+    
+    Returns:
+        str: Rendered HTML template with the login form or appropriate messages.
+        Redirect: Redirects to the products page if the user is already logged in.
+    """
     curr_user = Users.get_user_by_email(session.get('user'))
     #If none, that means the curr_user isnt logged in, so send them to login page
     if curr_user == None:
@@ -36,11 +57,24 @@ def login():
     
 @auth.route('/logout')
 def logout():
+    """Logs out the user by clearing the session and redirects to the index page.
+    
+    Returns:
+        redirect: Redirects the user to the index page.
+    """
     session['user'] = None
     return redirect('/') #just sends them back to index
 
 @auth.route("/sign-up", methods=['GET', 'POST'])
 def sign_up():
+    """Handles user sign-up process.
+    
+    If the user is not logged in, the function either displays the sign-up form (GET request)
+    or processes the submitted form data to create a new user account (POST request).
+    
+    Returns:
+        str: Rendered HTML template with the sign-up form or appropriate messages.
+    """
     curr_user = Users.get_user_by_email(session.get('user'))
     print(curr_user)
     
@@ -77,6 +111,14 @@ def sign_up():
 
 @auth.route("/search", methods=['GET', 'POST'])
 def search():
+    """Handles product search functionality.
+    
+    If the user is not logged in, redirects them to the login page. Otherwise, the function
+    processes search requests (POST) and displays search results or the search form (GET).
+    
+    Returns:
+        str: Rendered HTML template with search results or search form.
+    """
     curr_user = Users.get_user_by_email(session.get('user'))
     if curr_user == None:
         return redirect('/login')
