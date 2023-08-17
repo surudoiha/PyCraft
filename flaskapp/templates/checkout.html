@@ -7,7 +7,7 @@
 
 <div class="container d-flex align-items-center justify-content-center" id="checkout-form">
     <div class="text-center left-side">
-        <form>
+        <form method="POST">
             <div class="form-group billing-form">
                 <h2>Billing Information</h2>
                 <div class="row">
@@ -28,15 +28,15 @@
                 <div class="row">
                     <div class="col">
                        <label for="inputAddress"><i class="bi bi-house-door-fill"></i>Address</label>
-                       <input type="text" class="form-control " id="inputAddress" aria-describedby="addressHelp" placeholder="123 Apple St." required>
+                       <input type="text" class="form-control " id="inputAddress" name="inputAddress" aria-describedby="addressHelp" placeholder="123 Apple St." required>
                     </div>
                     <div class="col">
                         <label for="inputCity"><i class="bi bi-buildings-fill"></i>City</label>
-                        <input type="text" class="form-control " id="inputCity" aria-describedby="cityHelp" placeholder="Los Angeles" required>
+                        <input type="text" class="form-control " id="inputCity" name="inputCity" aria-describedby="cityHelp" placeholder="Los Angeles" required>
                     </div>
                     <div class="col">
                         <label for="inputZip"><i class="bi bi-geo-fill"></i>Zip</label>
-                        <input type="number" class="form-control " id="inputZip" aria-describedby="zipHelp" placeholder="00000" required>
+                        <input type="number" class="form-control " id="inputZip" name="inputZip" aria-describedby="zipHelp" placeholder="00000" required>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                 <div class="row">
                     <div class="col">
                         <label for="inputCIV">CV</label>
-                        <input type="number" class="form-control " id="inputCC" aria-describedby="CCHelp" placeholder="XXX" required>
+                        <input type="number" class="form-control " id="inputCV" aria-describedby="CCHelp" placeholder="XXX" required>
                     </div>
 
                     <div class="col">
@@ -85,7 +85,7 @@
               </div>
             </div>
             
-        </form>            
+                   
     </div>
 
     <div class="verticalLine"></div>
@@ -102,10 +102,11 @@
       <h4 >Shipping: $<span id="shippingCost" name="shippingCost">5.00</span></h4>
       <br>
       <hr class="horizontalLine">
-      <h3> Total Order: $<span id="totalOrder" name="totalOrder">{{ total_order }}</span></h3>
+      <h3> Total Order: $<span id="totalOrder" name="totalOrder">{{ total_order + 5 }}</span></h3>
         <br>
-        <button type="submit" class="btn btn-primary btn-group-lg" id="btnSubmit">Place Order</button>
 
+        <button type="submit" class="btn btn-primary btn-group-lg" id="btnSubmit">Place Order</button>
+    </form> 
     </div>
 
 </div>
