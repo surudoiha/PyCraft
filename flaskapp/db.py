@@ -23,7 +23,8 @@ from . import app
 
 db_blueprint = Blueprint('db', __name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://sql9635613:aL1s9kYG4G@sql9.freemysqlhosting.net:3306/sql9635613'
+#app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://sql9635613:aL1s9kYG4G@sql9.freemysqlhosting.net:3306/sql9635613'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///pycraft.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
 #initialize DB
@@ -32,6 +33,8 @@ app.app_context().push()
 
 from .modules.models.user_model import Users
 from .modules.models.cart_model import Cart
+from .modules.models.product_model import Products
+from .modules.models.order_model import Orders
 
 #Testing db by just finding a user and their cart
 @db_blueprint.route("/test-db")

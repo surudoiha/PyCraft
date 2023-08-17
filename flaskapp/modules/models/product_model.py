@@ -78,4 +78,5 @@ class Products(db.Model):
     def remove_extra(id):
         Products.query.filter(Products.prod_id == id).delete()
         db.session.commit()
-
+        
+        
