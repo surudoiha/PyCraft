@@ -26,4 +26,5 @@ def home():
     """
     curr_user = Users.get_user_by_email(session.get('user'))
     print(curr_user)
+    
     return render_template("index.html", user=curr_user)

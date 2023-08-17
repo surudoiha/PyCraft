@@ -69,6 +69,8 @@ def products():
     else:
         for prod in prods:
             print(prod)
+            
+        
         return render_template("products.html", products = prods, user=curr_user)
     
 

@@ -52,7 +52,7 @@ def login():
     #if they are already logged in, just send them to the products page
     else:
         return redirect('/products')
-
+    
     return render_template("login.html", user = curr_user)
     
 @auth.route('/logout')
@@ -104,7 +104,6 @@ def sign_up():
     else:
         return redirect('/products')
         
-
     return render_template("sign_up.html", user = curr_user)
 
 
@@ -133,5 +132,4 @@ def search():
                 print(search_results)
 
                 return render_template('search.html', search_results=search_results, user=curr_user, search_item = search_item)
-
         return render_template('search.html', results=[], user=curr_user, search_item = search_item)

@@ -17,6 +17,7 @@
 from ...db import db
 from flask_login import current_user, UserMixin
 from .cart_model import Cart
+from .order_model import Orders
 
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement=True)
@@ -82,3 +83,25 @@ class Users(UserMixin, db.Model):
     def get_id(self):
         user = Users.query.filter(Users.email == self.email).first()
         return user.id
+    
+    def place_order(self, shippingType, address, price):
+        """ Places an order based on the items in the user's cart
+            as well as their input in checkout
+
+        Args:
+            shippingType (string): _description_
+            address (string): Address the order will be sent to
+            price (float): Price of the order
+
+        Returns:
+            Order: Returns the order that was created
+        """
+        return Orders.place_order(self.id, shippingType, address, price)
+        
+    def clear_cart(self):
+        """ Will clear the user's cart. 
+            This is for when the user places an order
+        """
+        cart = self.get_user_cart()
+        for item in cart:
+            Cart.remove_item(item.cart_id)

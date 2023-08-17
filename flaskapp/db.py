@@ -26,6 +26,9 @@ db_blueprint = Blueprint('db', __name__)
 #app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://sql9635613:aL1s9kYG4G@sql9.freemysqlhosting.net:3306/sql9635613'
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///pycraft.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_MAX_OVERFLOW'] = 5000
+app.config['SQLALCHEMY_POOL_SIZE'] = 500
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 60
     
 #initialize DB
 db = SQLAlchemy(app)

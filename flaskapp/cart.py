@@ -21,6 +21,7 @@ from flask import flash
 from .db import db
 from .modules.models.user_model import Users
 from .modules.models.cart_model import Cart
+from .modules.models.product_model import Products
 
 cart_blueprint = Blueprint('cart', __name__)
 
@@ -38,7 +39,7 @@ def cart():
         return redirect('/login')
     else:
         cart_items = curr_user.get_user_cart()
-        return render_template("cart.html", cart_items=cart_items, user=curr_user)
+        return render_template("cart.html", cart_items=cart_items, user=curr_user, products = Products.get_prod_list())
     
 @cart_blueprint.route("/update_cart/<int:cart_id>", methods=['GET', 'POST']) #the int will be the cart_id
 def update_cart(cart_id):
@@ -84,5 +85,4 @@ def remove_item(cart_id):
     else:
         Cart.remove_item(cart_id)
         flash("Successfully Removed Item", "alert-success")
-        
     return redirect('/cart')
