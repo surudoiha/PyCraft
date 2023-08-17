@@ -29,6 +29,7 @@ def create_app():
     from .db import db_blueprint
     from .cart import cart_blueprint
     from .checkout import checkout_blueprint 
+    from .order import orders_blueprint
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
@@ -36,6 +37,7 @@ def create_app():
     app.register_blueprint(db_blueprint)
     app.register_blueprint(cart_blueprint)
     app.register_blueprint(checkout_blueprint) 
+    app.register_blueprint(orders_blueprint)
 
 
     return app
