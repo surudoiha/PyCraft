@@ -33,7 +33,7 @@ class Products(db.Model):
         return self.price
     
     def get_id(self):
-        return self.id
+        return self.prod_id
     
 
     def get_prod_by_id(prod_list, prod_id):
@@ -48,7 +48,7 @@ class Products(db.Model):
         """
         #for loop that returns index of prod
         for i in range(len(prod_list)):
-            if prod_list[i].id == prod_id:
+            if prod_list[i].prod_id == prod_id:
                 return prod_list[i]
             else:
                 return None
