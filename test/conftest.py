@@ -5,7 +5,7 @@ from flaskapp.modules.models.user_model import Users
 
 from flask import Flask  # need Flask to create a mock app
 
-@pytest.fixture(scope='module')
+@pytest.fixture()
 def app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
