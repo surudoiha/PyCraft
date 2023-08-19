@@ -9,6 +9,12 @@ def test_add_item(app, user, product):
     
     with app.app_context():
         assert Cart.query.filter(Cart.owner_id == curr_user.id).first().cart_id == 1
+        assert Cart.query.filter(Cart.owner_id == curr_user.id).first().quantity == 1
+
+        
+        curr_user.add_item(prod)
+        #check to see if it went to the if because prod already in cart
+        assert Cart.query.filter(Cart.owner_id == curr_user.id).first().quantity == 2
 
 def test_update_quantity(app, user, product, cart):
     curr_user = Users.query.first()

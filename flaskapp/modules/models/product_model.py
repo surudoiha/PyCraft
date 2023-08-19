@@ -44,14 +44,20 @@ class Products(db.Model):
             prod_id (int): id of the product you're looking for
 
         Returns:
-            _type_: int
+            Product: The product with that id
         """
+        prod = None
         #for loop that returns index of prod
         for i in range(len(prod_list)):
+            if prod:
+                break
+            
             if prod_list[i].prod_id == prod_id:
-                return prod_list[i]
+                prod = prod_list[i]
             else:
-                return None
+                prod = None
+                
+        return prod
     
     def get_prod_list():
         """Will retrieve all of the products in the database
