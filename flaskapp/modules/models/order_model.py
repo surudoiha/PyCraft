@@ -40,7 +40,7 @@ class Orders(db.Model):
         # Build items JSON dict
         items = {}
         for item in cart_items:
-            product = Products.query.get(item.product)
+            product = db.session.get(Products, item.product)
             items[product.prod_id] = {
                 "name": product.name,
                 "brand": product.brand, 
