@@ -21,6 +21,7 @@ Algorithms:
 from flask import Blueprint, render_template, session, redirect, flash, request
 from .modules.models.user_model import Users
 from .modules.models.product_model import Products
+from collections import defaultdict
 import requests
 from dotenv import load_dotenv
 import os
@@ -45,6 +46,13 @@ def checkout():
     else:
         products = Products.get_prod_list()
         cart = curr_user.get_user_cart()
+
+        # Group the cart items by product name and count the occurrences
+        cart_dict = defaultdict(int)
+        for item in cart:
+            cart_dict[item.product] += item.quantity
+
+        grouped_cart = [{'product': prod_id, 'count': count, 'price': products[prod_id-1].price} for prod_id, count in cart_dict.items()]
         print(curr_user.email)
         if cart == []:
             flash("There's no products in your cart to checkout!", 'alert-danger')
@@ -59,7 +67,7 @@ def checkout():
                 confirmed_order(curr_user, total_order)
                 return redirect('/orders')
                 
-    return render_template("checkout.html", user=curr_user, cart_items=cart, order_cost=order_cost, taxes=taxes, total_order=total_order, products=products)
+    return render_template("checkout.html", user=curr_user, cart_items=grouped_cart, order_cost=order_cost, taxes=taxes, total_order=total_order, products=products)
 
 def confirmed_order(curr_user, price):
     shipping = request.form.get('flexRadioDefault') #get the shipping type selected
