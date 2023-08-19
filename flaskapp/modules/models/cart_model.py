@@ -22,7 +22,7 @@ class Cart(db.Model):
     quantity = db.Column(db.Integer)
     
     def __repr__(self):
-        return f'<Cart Owner: {self.owner_id}, Brand+Name+Price: {self.brand} {self.name} {self.price}>'
+        return f'<Cart Owner: {self.owner_id}, Cart ID: {self.cart_id}>, Quantity: {self.quantity}'
     
     def get_cart_items(self):
         print('')
@@ -32,7 +32,7 @@ class Cart(db.Model):
             
         Args:
             owner (Users): User that we are updating the product's quantity in their cart
-            product (Product): The product we are updating the quantity for
+            item (Product): The product we are updating the quantity for
         """
         owner_id = owner.get_id()
         query = Cart.query.filter(Cart.owner_id == owner_id, Cart.product == item.prod_id).first()
@@ -53,7 +53,7 @@ class Cart(db.Model):
         """
         owner_id = owner.get_id()
         #gets the item
-        user_item = Cart.query.filter(Cart.owner_id == owner_id, Cart.product == item.product).first()
+        user_item = Cart.query.filter(Cart.owner_id == owner_id, Cart.product == item.prod_id).first()
         
         #updates its quantity
         user_item.quantity = new_quantity

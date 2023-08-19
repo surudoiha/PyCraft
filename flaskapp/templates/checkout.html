@@ -93,7 +93,7 @@
       <h2>Cart <i class="bi bi-cart3"></i></h2>
       <br>
       {% for item in cart_items %}
-      <h4>{{item.quantity}}x {{ products[item.product-1].name }} <span class="price">${{ products[item.product-1].price * item.quantity }}</span></h4>
+      <h4>{{ products[item.product-1].name }} {% if item.count > 1 %}x{{ item.count }}{% endif %} <span class="price">${{ item.price * item.count }}</span></h4>
       {% endfor %}
       <br>
       <hr class="horizontalLine">

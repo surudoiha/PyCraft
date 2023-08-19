@@ -2,6 +2,7 @@ import pytest
 from flaskapp.db import db
 from flaskapp.modules.models.product_model import Products
 from flaskapp.modules.models.user_model import Users
+from flaskapp.modules.models.cart_model import Cart
 
 from flask import Flask  # need Flask to create a mock app
 
@@ -44,3 +45,23 @@ def user(app):
         yield user
         db.session.delete(user)
         db.session.commit()
+        
+@pytest.fixture(scope='function')
+def cart(app, user, product):
+    curr_user = Users.query.first()
+    prod = Products.query.first()
+    
+    with app.app_context():
+        cart_item = Cart(owner_id = curr_user.id, product=prod.prod_id, quantity = 1)
+        db.session.add(cart_item)
+        db.session.commit()
+        yield cart
+        cart_item = Cart(owner_id = curr_user.id, product=prod.prod_id, quantity = 1)
+        if not cart_item:
+            #if not removed from one of tests already, now remove it
+            db.session.delete(cart_item)
+            db.session.commit()
+        
+            
+            
+        
