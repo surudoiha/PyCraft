@@ -40,7 +40,7 @@ def add_to_cart(product_id):
         print('ran for {x}'.format(x=product_id) )
         if 1 <= product_id <= len(prods)+1:
             print("inside add_to_cart if ")
-            selected_prod = prods[product_id-1]
+            selected_prod = Products.get_prod_by_id(prods, product_id)
             if selected_prod != None:
                 curr_user.add_item(selected_prod)
                 flash("Product added successfully", "alert-success")

@@ -11,15 +11,12 @@ def app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['TESTING'] = True
     db.init_app(app)
     with app.app_context():
         db.create_all()
         yield app
         db.drop_all()
-
-@pytest.fixture(scope='module')
-def client(app):
-    return app.test_client()
 
 @pytest.fixture(scope='function')
 def product(app):
@@ -32,7 +29,7 @@ def product(app):
         db.session.delete(product)
         db.session.commit()
 
-@pytest.fixture(scope='module')
+@pytest.fixture()
 def client(app):
     return app.test_client()
 
