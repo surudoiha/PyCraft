@@ -60,7 +60,7 @@ class Orders(db.Model):
         Args:
             id_to_remove (int): Order_ID that will be used to delete that order
         """
-        Orders.query.filter(Orders.cart_id == id_to_remove).delete()
+        Orders.query.filter(Orders.order_id == id_to_remove).delete()
         db.session.commit()
         
 #testing how to print the items of order
