@@ -53,7 +53,7 @@ class Cart(db.Model):
         """
         owner_id = owner.get_id()
         #gets the item
-        user_item = Cart.query.filter(Cart.owner_id == owner_id, Cart.product == item.prod_id).first()
+        user_item = Cart.query.filter(Cart.owner_id == owner_id, Cart.product == item.product).first()
         
         #updates its quantity
         user_item.quantity = new_quantity

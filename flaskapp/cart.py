@@ -69,7 +69,7 @@ def update_cart(cart_id):
                 flash("Successfully Updated Item", "alert-warning")
                 return redirect('/cart')
 
-    return render_template("update_cart.html", prod_to_change=cart_item_to_change, user=curr_user)
+    return render_template("update_cart.html", prod_to_change=cart_item_to_change, user=curr_user, products = Products.get_prod_list())
     
 @cart_blueprint.route("/cart/remove_item/<int:cart_id>", methods=['GET', 'POST'])
 def remove_item(cart_id):

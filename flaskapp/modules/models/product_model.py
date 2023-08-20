@@ -80,7 +80,11 @@ class Products(db.Model):
         db.session.add(product)
         db.session.commit()
     
-    
+    def add_prod_with_image(brand, name, price, image):
+        product = Products(brand=brand, name=name, price=price, image=image)
+        db.session.add(product)
+        db.session.commit()
+        
     def remove_extra(id):
         Products.query.filter(Products.prod_id == id).delete()
         db.session.commit()

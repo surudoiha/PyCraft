@@ -18,9 +18,9 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{ prod_to_change.brand }}</td>
-          <td>{{prod_to_change.name}}</td>
-          <td>${{prod_to_change.price}}</td>
+          <td>{{ products[prod_to_change.product-1].brand }}</td>
+          <td>{{products[prod_to_change.product-1].name}}</td>
+          <td>${{products[prod_to_change.product-1].price}}</td>
           <form method="POST">
             <td><input type="number" id="quantity" name="quantity" min="1" value="{{prod_to_change.quantity}}" pattern="^[0-9]*$"></td>
           
