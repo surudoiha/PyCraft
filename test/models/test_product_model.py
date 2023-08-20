@@ -11,13 +11,14 @@ def test_get_id(product):
     assert product.get_id() is not None
 
 def test_get_prod_by_id():
-    prod_list = [
-        Products(brand="Nike", name="Air Max", price=150.0),
-        Products(brand="Adidas", name="Superstar", price=80.0),
-        Products(brand="Puma", name="Clyde", price=90.0)
-    ]
+    Products.add_prod(brand="Nike", name="Air Max", price=150.0)
+    Products.add_prod(brand="Adidas", name="Superstar", price=80.0)
+    Products.add_prod(brand="Puma", name="Clyde", price=90.0)
+    
+    prod_list = Products.get_prod_list()
+    
     prod_id = prod_list[1].prod_id  # existing product ID
-    assert Products.get_prod_by_id(prod_list, prod_id) == prod_list[0]  #there is one more added in fixtures
+    assert Products.get_prod_by_id(prod_list, prod_id) == prod_list[1]  #there is one more added in fixtures
 
     non_existent_prod_id = 999  # A non-existent product ID
     assert Products.get_prod_by_id(prod_list, non_existent_prod_id) is None

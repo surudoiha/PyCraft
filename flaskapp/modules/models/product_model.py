@@ -48,14 +48,14 @@ class Products(db.Model):
         """
         prod = None
         #for loop that returns index of prod
-        for i in range(len(prod_list)):
-            if prod:
-                break
-            
+        for i in range(len(prod_list)):            
             if prod_list[i].prod_id == prod_id:
                 prod = prod_list[i]
             else:
                 prod = None
+                
+            if prod:
+                break
                 
         return prod
     
