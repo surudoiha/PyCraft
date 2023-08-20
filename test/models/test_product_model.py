@@ -10,11 +10,7 @@ def test_get_price(product):
 def test_get_id(product):
     assert product.get_id() is not None
 
-def test_get_prod_by_id():
-    Products.add_prod(brand="Nike", name="Air Max", price=150.0)
-    Products.add_prod(brand="Adidas", name="Superstar", price=80.0)
-    Products.add_prod(brand="Puma", name="Clyde", price=90.0)
-    
+def test_get_prod_by_id():    
     prod_list = Products.get_prod_list()
     
     prod_id = prod_list[1].prod_id  # existing product ID
